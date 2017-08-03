@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>Lista de Super - Ejemplo de SQLAlchemy</h3>
+<hr/>
+{%- for categoria, mensaje in get_flashed_messages(with_categories=true)  %}
+<div class="alert alert-danger">
+    {{ mensaje }}
+</div>
+{%- endfor %}
+
+<form action="{{ request.path }}" method="post">
+    <label>Nombre</label>
+    <input type="text" name="nombre" placeholder="nombre"><br>
+    <label>Supermercado</label>
+    <input type="text" name="supermercado" placeholder="supermercado"><br>
+    <label>Producto</label>
+    <input type="text" name="producto" placeholder="producto"><br>
+    <label>Pin</label>
+    <input type="text" name="pin" placeholder="pin"><br>
+    <input type="submit" value="Enviar">
+</form>
+</body>
+</html>

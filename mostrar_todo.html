@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+<h3><a href="{{ url_for('mostrar_todo') }}">Comentarios - Ejemplo SQLAlchemy</a></h3>
+<hr/>
+  {% for mensaje in get_flashed_messages() %}
+    {{ mensaje }}
+  {% endfor %}
+<h3>Lista de Super (<a href="{{ url_for('nuevo') }}">Agregar Productos</a>)</h3>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>supermercado</th>
+        <th>producto</th>
+        <th>Pin</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for productos in listasuper %}
+    <tr>
+        <td>{{ productos.nombre }}</td>
+        <td>{{ productos.supermercado }}</td>
+        <td>{{ productos.producto }}</td>
+        <td>{{ productos.pin }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
