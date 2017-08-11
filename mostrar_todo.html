@@ -3,12 +3,35 @@
 <head>
 </head>
 <body>
-<h3><a href="{{ url_for('mostrar_todo') }}">Comentarios - Ejemplo SQLAlchemy</a></h3>
+<h2><a href="{{ url_for('mostrar_todo') }}">Resetea los comentarios</a></h2>
 <hr/>
   {% for mensaje in get_flashed_messages() %}
     {{ mensaje }}
   {% endfor %}
 <h3>Lista de Super (<a href="{{ url_for('nuevo') }}">Agregar Productos</a>)</h3>
+
+<ul>
+{% for super in supers %}
+    <li>
+         <HR width="80%">
+        Producto: {% if super.listo %} <strike> {% endif %}{{ super.content }} {% if super.listo %} </strike>{% endif %}
+
+        <br>
+        <br>
+      <td>El precio: {{ super.precio }}</td>
+        <br>
+        <a href="/listo/{{ super.id }}">Tachar</a>
+        <a href="/delete/{{ super.id }}">Borrar</a>
+    </li>
+{% endfor %}
+</ul>
+
+
+<form action="/super" method="post">
+    <p><input type="text" name="content" placeholder="Producto"></p>
+    <p><input type="text" name="precio" placeholder="Precio"></p>
+    <input type="submit" value="Agregar Producto">
+</form>
 
 <table>
     <thead>
