@@ -1,57 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" type="image/png" href="static/favicon.png"/>
+
+<title>SuperList</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/listasuper.css') }}">
 </head>
 <body>
-<h2><a href="{{ url_for('mostrar_todo') }}">Resetea los comentarios</a></h2>
-<hr/>
-  {% for mensaje in get_flashed_messages() %}
-    {{ mensaje }}
-  {% endfor %}
-<h3>Lista de Super (<a href="{{ url_for('nuevo') }}">Agregar Productos</a>)</h3>
+
+
+
+
+<h3>
+    Lista de Super
+</h3>
+  <img src="static/logo.png" alt="Logo">
 
 <ul>
+      <br>
+         {% for mensaje in get_flashed_messages() %}
+    {{ mensaje }}
+  {% endfor %}<br>
+    <form action="/super" method="post">
+    <p><input type="text" name="content" placeholder="Producto"> <input type="text" name="cantidad" placeholder="Cantidad"></p>
+    <p><input type="text" name="precio" placeholder="Precio"></p>
+    <input type="submit" value="Agregar">
+
+</form>
+
 {% for super in supers %}
     <li>
-         <HR width="80%">
+        <hr/>
         Producto: {% if super.listo %} <strike> {% endif %}{{ super.content }} {% if super.listo %} </strike>{% endif %}
-
-        <br>
+<td>({{ super.cantidad }})</td>
         <br>
       <td>El precio: {{ super.precio }}</td>
         <br>
-        <a href="/listo/{{ super.id }}">Tachar</a>
-        <a href="/delete/{{ super.id }}">Borrar</a>
+        <a href="/listo/{{ super.id }}"> <img src="https://cdn2.iconfinder.com/data/icons/peppyicons/512/Checked-512.png" height="45" width="45"> </a>
+        <a href="/delete/{{ super.id }}"> <img src="http://icons.iconarchive.com/icons/hopstarter/sleek-xp-basic/128/Close-icon.png" height="45" width="45" > </a>
     </li>
 {% endfor %}
 </ul>
 
 
-<form action="/super" method="post">
-    <p><input type="text" name="content" placeholder="Producto"></p>
-    <p><input type="text" name="precio" placeholder="Precio"></p>
-    <input type="submit" value="Agregar Producto">
-</form>
 
-<table>
-    <thead>
-    <tr>
-        <th>Nombre</th>
-        <th>supermercado</th>
-        <th>producto</th>
-        <th>Pin</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for productos in listasuper %}
-    <tr>
-        <td>{{ productos.nombre }}</td>
-        <td>{{ productos.supermercado }}</td>
-        <td>{{ productos.producto }}</td>
-        <td>{{ productos.pin }}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+
+
 </body>
 </html>
